@@ -45,13 +45,13 @@ function getRandomArrFromArr (array, num) {
     return array;
   }
   const resultsArr = [];
-  for (let i = 0; i < num; i++ ) {
+  for (let ind = 0; ind < num; ind++ ) {
     const someElement = array[getRandomNumberFromTo(0, array.length -1)];
     if (!resultsArr.includes(someElement)) {
       resultsArr.push(someElement);
     }
     else {
-      i--;
+      ind--;
       if (resultsArr.length === array.length || array.length === num) {
         break;
       }
@@ -65,10 +65,10 @@ const createObjects = (qty) => {
   const tenObjects = [];
 
 
-  for (let i = 0; i < qty; i++) {
+  for (let index = 0; index < qty; index++) {
 
-    const avatarAdress = `img/avatars/user${  AVATAR_ADRESS[i]  }.png`;
-    const proposalTitle = `Предложение № ${  i}`;
+    const avatarAdress = `img/avatars/user${  AVATAR_ADRESS[index]  }.png`;
+    const proposalTitle = `Предложение № ${  index}`;
     const locationLat = getRandomFloatFromTo(35.65000, 35.70000, 5);
     const locationLng = getRandomFloatFromTo(139.70000, 139.80000, 5);
     const coordinates = `${locationLat  }, ${  locationLng}`;
@@ -91,9 +91,9 @@ const createObjects = (qty) => {
         guests: numberOfGuests,
         checkin: TIME_OF_CHECKIN_AND_CHECKOUT[getRandomNumberFromTo(0, TIME_OF_CHECKIN_AND_CHECKOUT.length -1)],
         checkout: TIME_OF_CHECKIN_AND_CHECKOUT[getRandomNumberFromTo(0, TIME_OF_CHECKIN_AND_CHECKOUT.length -1)],
-        features: JSON.stringify(getRandomArrFromArr(FEATURES, getRandomNumberFromTo(1, FEATURES.length))),
+        features: getRandomArrFromArr(FEATURES, getRandomNumberFromTo(1, FEATURES.length)),
         description: DISCRIPTION[getRandomNumberFromTo(0, DISCRIPTION.length -1)],
-        photos: JSON.stringify(getRandomArrFromArr(PHOTOS,  getRandomNumberFromTo(1, PHOTOS.length))),
+        photos: getRandomArrFromArr(PHOTOS,  getRandomNumberFromTo(1, PHOTOS.length)),
       },
 
       location: {
@@ -108,3 +108,4 @@ const createObjects = (qty) => {
 };
 
 createObjects(10);
+
