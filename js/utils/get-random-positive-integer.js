@@ -27,3 +27,17 @@ function getRandomPositiveInteger (aa, bb) {
   // потому что Math.random() генерирует только дробные числа и ноль.
   return Math.floor(result);
 }
+
+function getRandomNumberFromTo (min, max) {
+  if (min >= max) {
+    throw new Error('Диапазон введен неверно');
+  }
+  if (min < 0 || max < 0) {
+    throw new Error('Числа в диапазоне должны быть положительными');
+  }
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+
+}
+
+export {getRandomNumberFromTo, getRandomPositiveInteger};

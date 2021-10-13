@@ -1,7 +1,7 @@
 // Функция взята из интернета и доработана
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 
-// eslint-disable-next-line no-unused-vars
+
 function getRandomPositiveFloat (aa, bb, digits = 1) {
   // Чтобы не заставлять пользователя нашей функции помнить порядок аргументов,
   // реализуем поддержку передачи минимального и максимального значения в любом порядке,
@@ -21,3 +21,16 @@ function getRandomPositiveFloat (aa, bb, digits = 1) {
   // указать требуемое количество знаков после точки
   return result.toFixed(digits);
 }
+
+
+function getRandomFloatFromTo (min, max, num) {
+  if (min >= max) {
+    throw new Error('Диапазон введен неверно');
+  }
+  if (min < 0 || max < 0) {
+    throw new Error('Числа в диапазоне должны быть положительными');
+  }
+  return ((Math.random() * (max - min)) + min).toFixed(num);
+}
+
+export {getRandomFloatFromTo, getRandomPositiveFloat};
