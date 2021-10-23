@@ -2,6 +2,14 @@ import {getRandomFloatFromTo} from './utils/get-random-positive-float.js';
 import {getRandomNumberFromTo} from './utils/get-random-positive-integer.js';
 import {getRandomArrFromArr} from './utils/util.js';
 
+const TYPES = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
+};
+
 const AVATAR_ADRESS = [
   '01','02','03','04','05','06','07','08','09','10',
 ];
@@ -64,4 +72,4 @@ const createObjects = (qty) => {
   return objectsArr;
 };
 
-export {createObjects};
+export {createObjects, TYPES};

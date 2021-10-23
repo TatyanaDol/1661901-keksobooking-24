@@ -1,4 +1,7 @@
-import {createObjects} from './data.js';
+import {constructPopupCard} from './popup-constructor.js';
 
-createObjects(10);
+const mapCanvas = document.querySelector('.map__canvas');
+const popupCards = constructPopupCard(10);
+
+mapCanvas.appendChild(popupCards[0]);
 
