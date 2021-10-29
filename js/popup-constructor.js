@@ -41,7 +41,7 @@ export function constructPopupCard (numberOfCards) {
     }
 
     if (obj.offer.type) {
-      objPopup.querySelector('.popup__type').textContent = Types[obj.offer.type];
+      objPopup.querySelector('.popup__type').textContent = Types[obj.offer.type.toUpperCase()];
     } else {
       objPopup.querySelector('.popup__type').classList.add('hidden');
     }

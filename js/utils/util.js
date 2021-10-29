@@ -1,4 +1,5 @@
 import {getRandomNumberFromTo} from './get-random-positive-integer.js';
+import {MAX_PRICE, MinPrice} from '../data.js';
 
 function getRandomArrFromArr (array, num) {
 
@@ -21,4 +22,33 @@ function getRandomArrFromArr (array, num) {
   return resultsArr;
 }
 
-export {getRandomArrFromArr};
+function disableOptions (capacitySelectOptionsArray, roomNumberValue) {
+
+  for (let i = 0; i < capacitySelectOptionsArray.length; i++ ) {
+
+    if (capacitySelectOptionsArray[i].value > roomNumberValue  || (roomNumberValue !== '100' && capacitySelectOptionsArray[i].value === '0')) {
+      capacitySelectOptionsArray[i].disabled = true;
+    } else if (roomNumberValue === '100' && capacitySelectOptionsArray[i].value !== '0') {
+      capacitySelectOptionsArray[i].disabled = true;
+    } else {
+      capacitySelectOptionsArray[i].disabled = false;
+    }
+
+  }
+}
+
+function validatePriceInput () {
+  const priceInput = document.querySelector('#price');
+  const typeSelect = document.querySelector('#type');
+  const valuePriceInput = priceInput.value;
+  if (valuePriceInput < MinPrice[typeSelect.value.toUpperCase()]) {
+    priceInput.setCustomValidity(`Значение цены должно быть не меньше ${  MinPrice[typeSelect.value.toUpperCase()]}`);
+  } else if (valuePriceInput > MAX_PRICE) {
+    priceInput.setCustomValidity(`Максимально допустимая цена: 1000000. Необходимо снизить цену на ${  valuePriceInput - MAX_PRICE}`);
+  } else {
+    priceInput.setCustomValidity('');
+  }
+  priceInput.reportValidity();
+}
+
+export {getRandomArrFromArr, disableOptions, validatePriceInput};
