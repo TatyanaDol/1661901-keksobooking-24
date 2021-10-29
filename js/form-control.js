@@ -1,4 +1,4 @@
-import {disableOptions, validatePriceInput} from './utils/util.js';
+import {disableOptions, validatePriceInput, synchronizeTimeinAndTimeout} from './utils/util.js';
 import {MIN_TITLE_LENGTH, MAX_TITLE_LENGTH, MinPrice} from './data.js';
 
 const adForm = document.querySelector('.ad-form');
@@ -52,11 +52,23 @@ const capacitySelectOptions = capacitySelect.options;
 roomNumberSelect.addEventListener('change', () => {
   disableOptions(capacitySelectOptions, roomNumberSelect.value);
 
-  for (let i = 0; i < capacitySelectOptions.length; i ++) {
-    if (capacitySelectOptions[i].disabled === false) {
+  for (let i = 0; i < capacitySelectOptions.length; i++) {
+    if (!capacitySelectOptions[i].disabled) {
       capacitySelectOptions[i].selected = true;
     }
   }
+});
+
+const timeinSelect = adForm.querySelector('#timein');
+const timeoutSelect = adForm.querySelector('#timeout');
+const timeinSelectOptions = timeinSelect.options;
+const timeoutSelectOptions = timeoutSelect.options;
+
+timeinSelect.addEventListener('change', () => {
+  synchronizeTimeinAndTimeout(timeinSelectOptions, timeoutSelectOptions);
+});
+timeoutSelect.addEventListener('change', () => {
+  synchronizeTimeinAndTimeout(timeoutSelectOptions, timeinSelectOptions);
 });
 
 export {deactivateForm, activateForm};
