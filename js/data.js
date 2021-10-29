@@ -18,12 +18,24 @@ const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'condit
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 
 const Types = {
-  flat: 'Квартира',
-  bungalow: 'Бунгало',
-  house: 'Дом',
-  palace: 'Дворец',
-  hotel: 'Отель',
+  FLAT: 'Квартира',
+  BUNGALOW: 'Бунгало',
+  HOUSE: 'Дом',
+  PALACE: 'Дворец',
+  HOTEL: 'Отель',
 };
+
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+const MAX_PRICE = 1000000;
+const MinPrice = {
+  BUNGALOW: 0,
+  FLAT: 1000,
+  HOTEL: 3000,
+  HOUSE: 5000,
+  PALACE: 10000,
+};
+
 
 const createObjects = (qty) => {
 
@@ -71,4 +83,4 @@ const createObjects = (qty) => {
   return objectsArr;
 };
 
-export {createObjects, Types};
+export {createObjects, Types, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH, MAX_PRICE, MinPrice};
