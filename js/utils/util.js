@@ -51,4 +51,12 @@ function validatePriceInput () {
   priceInput.reportValidity();
 }
 
-export {getRandomArrFromArr, disableOptions, validatePriceInput};
+function synchronizeTimeinAndTimeout (sourse, target) {
+  for (let i = 0; i < sourse.length; i++) {
+    if (sourse[i].selected) {
+      target[i].selected = true;
+    }
+  }
+}
+
+export {getRandomArrFromArr, disableOptions, validatePriceInput, synchronizeTimeinAndTimeout};
