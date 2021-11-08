@@ -3,12 +3,19 @@ import {MIN_TITLE_LENGTH, MAX_TITLE_LENGTH, MinPrice} from './data.js';
 
 const adForm = document.querySelector('.ad-form');
 const interactiveElements = adForm.querySelectorAll('fieldset');
+const mapFilters = document.querySelector('.map__filters');
+const interactiveElementsFilters = mapFilters.children;
+
 
 function deactivateForm () {
   adForm.classList.add('ad-form--disabled');
   interactiveElements.forEach((interactiveElementsItem) => {
     interactiveElementsItem.disabled = true;
   });
+  mapFilters.classList.add('map__filters--disabled');
+  for (let i = 0; i < interactiveElementsFilters.length; i++) {
+    interactiveElementsFilters[i].disabled = true;
+  }
 }
 
 function activateForm () {
@@ -16,6 +23,10 @@ function activateForm () {
   interactiveElements.forEach((interactiveElementsItem) => {
     interactiveElementsItem.disabled = false;
   });
+  mapFilters.classList.remove('map__filters--disabled');
+  for (let i = 0; i < interactiveElementsFilters.length; i++) {
+    interactiveElementsFilters[i].disabled = false;
+  }
 }
 
 const adTitleInput = adForm.querySelector('#title');
