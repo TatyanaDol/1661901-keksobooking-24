@@ -1,6 +1,8 @@
 import {getRandomNumberFromTo} from './get-random-positive-integer.js';
 import {MAX_PRICE, MinPrice} from '../data.js';
 
+const ERROR_MESSAGE_SHOW_TIME = 5000;
+
 function getRandomArrFromArr (array, num) {
 
   if (num >= array.length) {
@@ -59,4 +61,29 @@ function synchronizeTimeinAndTimeout (sourse, target) {
   }
 }
 
-export {getRandomArrFromArr, disableOptions, validatePriceInput, synchronizeTimeinAndTimeout};
+const showErrorMessage = (message) => {
+  const errorMessageContainer = document.createElement('div');
+  errorMessageContainer.style.zIndex = 100;
+  errorMessageContainer.style.position = 'absolute';
+  errorMessageContainer.style.left = '20%';
+  errorMessageContainer.style.top = 0;
+  errorMessageContainer.style.right = '20%';
+  errorMessageContainer.style.padding = '10px 3px';
+  errorMessageContainer.style.fontSize = '30px';
+  errorMessageContainer.style.textAlign = 'center';
+  errorMessageContainer.style.backgroundColor = 'white';
+  errorMessageContainer.style.color = 'darkred';
+  errorMessageContainer.style.border = 'solid red';
+
+
+  errorMessageContainer.textContent = message;
+
+  document.body.append(errorMessageContainer);
+
+  setTimeout(() => {
+    errorMessageContainer.remove();
+  }, ERROR_MESSAGE_SHOW_TIME);
+};
+
+
+export {getRandomArrFromArr, disableOptions, validatePriceInput, synchronizeTimeinAndTimeout, showErrorMessage};

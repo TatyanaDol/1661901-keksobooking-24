@@ -1,10 +1,14 @@
 import {disableOptions, validatePriceInput, synchronizeTimeinAndTimeout} from './utils/util.js';
 import {MIN_TITLE_LENGTH, MAX_TITLE_LENGTH, MinPrice} from './data.js';
+import {resetMap} from './map.js';
+import {sendData} from './api.js';
+
 
 const adForm = document.querySelector('.ad-form');
 const interactiveElements = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
 const interactiveElementsFilters = mapFilters.children;
+const resetButton = adForm.querySelector('.ad-form__reset');
 
 
 function deactivateForm () {
@@ -82,4 +86,79 @@ timeoutSelect.addEventListener('change', () => {
   synchronizeTimeinAndTimeout(timeoutSelectOptions, timeinSelectOptions);
 });
 
-export {deactivateForm, activateForm};
+const resetFormAndMap = () => {
+  adForm.reset();
+  resetMap();
+  mapFilters.reset();
+};
+
+resetButton.addEventListener('click', () => {
+  resetFormAndMap();
+});
+
+const setAdFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    sendData(
+      () => onSuccess(),
+      () => showSubmitErrorMessage(),
+      new FormData(evt.target),
+    );
+  });
+};
+
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const success = successTemplate.cloneNode(true);
+success.classList.add('hidden');
+document.body.append(success);
+
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const errorContainer = errorTemplate.cloneNode(true);
+errorContainer.classList.add('hidden');
+document.body.append(errorContainer);
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+const onEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeSuccessMessage();
+    closeSubmitErrorMessage();
+  }
+};
+
+function showSuccessMessage () {
+  resetFormAndMap();
+  success.classList.remove('hidden');
+  document.addEventListener('keydown', onEscKeydown);
+  success.addEventListener('click', () => {
+    closeSuccessMessage();
+  });
+}
+
+function closeSuccessMessage () {
+  success.classList.add('hidden');
+  document.removeEventListener('keydown', onEscKeydown);
+  success.removeEventListener('click', () => {
+    closeSuccessMessage();
+  });
+}
+
+function showSubmitErrorMessage () {
+  errorContainer.classList.remove('hidden');
+  document.addEventListener('keydown', onEscKeydown);
+  errorContainer.addEventListener('click', () => {
+    closeSubmitErrorMessage();
+  });
+}
+
+function closeSubmitErrorMessage () {
+  errorContainer.classList.add('hidden');
+  document.removeEventListener('keydown', onEscKeydown);
+  errorContainer.removeEventListener('click', () => {
+    closeSubmitErrorMessage();
+  });
+}
+
+
+export {deactivateForm, activateForm, setAdFormSubmit, resetFormAndMap, showSuccessMessage, closeSuccessMessage, showSubmitErrorMessage, closeSubmitErrorMessage};
