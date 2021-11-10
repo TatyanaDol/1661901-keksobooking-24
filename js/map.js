@@ -1,19 +1,20 @@
 import {constructOnePopupCard} from './popup-constructor.js';
-import {activateForm} from './form-control.js';
-import {createObjects} from './data.js';
-const tenObj = createObjects(10);
+import {activateForm, deactivateForm} from './form-control.js';
 
+
+const MAP_SCALE = 10;
 
 const addressInput = document.querySelector('#address');
+deactivateForm();
 
 const map = L.map('map-canvas')
   .on('load', () => {
     activateForm();
   })
   .setView({
-    lat: 35.68950,
-    lng: 139.69171,
-  }, 10);
+    lat: 35.69522,
+    lng: 139.77218,
+  }, MAP_SCALE);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -68,6 +69,16 @@ const createMarker = (obj) => {
     .bindPopup(constructOnePopupCard(obj));
 };
 
-tenObj.forEach((obj) => {
-  createMarker(obj);
-});
+const resetMap = () => {
+  marker.setLatLng({
+    lat: 35.69522,
+    lng: 139.77218,
+  });
+  map.closePopup()
+    .setView({
+      lat: 35.69522,
+      lng: 139.77218,
+    }, MAP_SCALE);
+};
+
+export {resetMap, createMarker};
