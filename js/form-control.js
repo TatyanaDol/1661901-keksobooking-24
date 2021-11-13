@@ -3,7 +3,6 @@ import {MIN_TITLE_LENGTH, MAX_TITLE_LENGTH, MinPrice} from './data.js';
 import {resetMap} from './map.js';
 import {sendData} from './api.js';
 
-
 const adForm = document.querySelector('.ad-form');
 const interactiveElements = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -159,6 +158,5 @@ function closeSubmitErrorMessage () {
     closeSubmitErrorMessage();
   });
 }
-
 
 export {deactivateForm, activateForm, setAdFormSubmit, resetFormAndMap, showSuccessMessage, closeSuccessMessage, showSubmitErrorMessage, closeSubmitErrorMessage};

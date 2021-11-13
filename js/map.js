@@ -1,7 +1,8 @@
 import {constructOnePopupCard} from './popup-constructor.js';
 import {activateForm, deactivateForm} from './form-control.js';
+import {compareCards, filterArrayOfCards} from './filter.js';
 
-
+const EVAREGE_MARKERS_COUNT = 10;
 const MAP_SCALE = 10;
 
 const addressInput = document.querySelector('#address');
@@ -47,6 +48,8 @@ marker.on('moveend', (evt) => {
   addressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 });
 
+const everageMarkersGroup = L.layerGroup().addTo(map);
+
 const createMarker = (obj) => {
   const {location: { lat, lng } } = obj;
   const everageMarkerIcon = L.icon({
@@ -65,7 +68,7 @@ const createMarker = (obj) => {
   );
 
   markerEverage
-    .addTo(map)
+    .addTo(everageMarkersGroup)
     .bindPopup(constructOnePopupCard(obj));
 };
 
@@ -81,4 +84,17 @@ const resetMap = () => {
     }, MAP_SCALE);
 };
 
-export {resetMap, createMarker};
+const renderCardsMarkers = (arrayOfCards) => {
+  everageMarkersGroup.clearLayers();
+  arrayOfCards
+    .slice()
+    .filter(filterArrayOfCards)
+    .sort(compareCards)
+    .slice(0, EVAREGE_MARKERS_COUNT)
+    .forEach((obj) => {
+      createMarker(obj);
+
+    });
+};
+
+export {resetMap, createMarker, renderCardsMarkers};
