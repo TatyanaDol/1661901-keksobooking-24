@@ -58,13 +58,26 @@ const setHousingGuestsFilterChange = (cb) => {
   });
 };
 
-function filterArrayOfCards (arrayElement) {
-
-  if ((objOfPersonalFilterValues.type === arrayElement.offer.type || objOfPersonalFilterValues.type === 'any') && (arrayElement.offer.price > Prices[objOfPersonalFilterValues.price.toUpperCase()].from && arrayElement.offer.price < Prices[objOfPersonalFilterValues.price.toUpperCase()].to) && (objOfPersonalFilterValues.rooms === arrayElement.offer.rooms.toString() || objOfPersonalFilterValues.rooms === 'any') && (objOfPersonalFilterValues.guests === arrayElement.offer.guests.toString() || objOfPersonalFilterValues.guests === 'any')) {
-    return true;
-  }
-  return false;
+function checkTypeFilter (element) {
+  return objOfPersonalFilterValues.type === element.offer.type || objOfPersonalFilterValues.type === 'any';
 }
+function checkPriceFilter (element) {
+  return element.offer.price > Prices[objOfPersonalFilterValues.price.toUpperCase()].from && element.offer.price < Prices[objOfPersonalFilterValues.price.toUpperCase()].to;
+}
+function checkRoomsFilter (element) {
+  return objOfPersonalFilterValues.rooms === element.offer.rooms.toString() || objOfPersonalFilterValues.rooms === 'any';
+}
+function checkGuestsFilter (element) {
+  return objOfPersonalFilterValues.guests === element.offer.guests.toString() || objOfPersonalFilterValues.guests === 'any';
+}
+
+function filterArrayOfCards (arrayElement) {
+  return checkTypeFilter(arrayElement) &&
+  checkPriceFilter(arrayElement) &&
+  checkRoomsFilter(arrayElement) &&
+  checkGuestsFilter(arrayElement);
+}
+
 
 const featuresList = {
   wifi: false,
