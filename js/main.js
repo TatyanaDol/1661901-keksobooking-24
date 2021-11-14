@@ -1,14 +1,30 @@
-import {createMarker} from './map.js';
+import {renderCardsMarkers} from './map.js';
 import {setAdFormSubmit, showSuccessMessage, showSubmitErrorMessage} from './form-control.js';
 import {getData} from './api.js';
 import {showErrorMessage} from './utils/util.js';
+import {debounce} from './utils/debounce.js';
+import {setcheckboxsContainerChange, setHousingGuestsFilterChange, setHousingRoomsFilterChange, setHousingPriceFilterChange, setHouseTypeFilterChange} from './filter.js';
 
-const EVAREGE_MARKERS_COUNT = 10;
+const RERENDER_DELAY = 500;
 
 getData((arrayOfCards) => {
-  arrayOfCards.slice(0, EVAREGE_MARKERS_COUNT).forEach((obj) => {
-    createMarker(obj);
-  });
+  renderCardsMarkers(arrayOfCards);
+
+  setHouseTypeFilterChange(debounce(
+    () => renderCardsMarkers(arrayOfCards), RERENDER_DELAY,
+  ));
+  setHousingPriceFilterChange(debounce(
+    () => renderCardsMarkers(arrayOfCards), RERENDER_DELAY,
+  ));
+  setHousingGuestsFilterChange(debounce(
+    () => renderCardsMarkers(arrayOfCards), RERENDER_DELAY,
+  ));
+  setHousingRoomsFilterChange(debounce(
+    () => renderCardsMarkers(arrayOfCards), RERENDER_DELAY,
+  ));
+  setcheckboxsContainerChange(debounce(
+    () => renderCardsMarkers(arrayOfCards), RERENDER_DELAY,
+  ));
 },
 () => showErrorMessage('Не удалось загрузить объявления'),
 );
