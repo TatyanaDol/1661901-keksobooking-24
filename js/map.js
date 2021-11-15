@@ -87,7 +87,6 @@ const resetMap = () => {
 const renderCardsMarkers = (arrayOfCards) => {
   everageMarkersGroup.clearLayers();
   arrayOfCards
-    .slice()
     .filter(filterArrayOfCards)
     .sort(compareCards)
     .slice(0, EVAREGE_MARKERS_COUNT)
