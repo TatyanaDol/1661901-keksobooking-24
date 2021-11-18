@@ -2,16 +2,16 @@ import {getRandomFloatFromTo} from './utils/get-random-positive-float.js';
 import {getRandomNumberFromTo} from './utils/get-random-positive-integer.js';
 import {getRandomArrFromArr} from './utils/util.js';
 
-const AVATAR_ADRESS = [
+const AVATARS_ADRESSES = [
   '01','02','03','04','05','06','07','08','09','10',
 ];
 
-const TYPE = [
+const HOUSING_TYPES = [
   'palace', 'flat', 'house', 'bungalow', 'hotel',
 ];
 const TIME_OF_CHECKIN_AND_CHECKOUT = ['12:00', '13:00', '14:00'];
 
-const DISCRIPTION = ['Красивое', 'Не очень красивое', 'Божественно', 'Для новобрачных', 'Подойдет одиноким котикам'];
+const DESCRIPTIONS = ['Красивое', 'Не очень красивое', 'Божественно', 'Для новобрачных', 'Подойдет одиноким котикам'];
 
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
@@ -43,7 +43,7 @@ const createObjects = (qty) => {
 
   for (let index = 0; index < qty; index++) {
 
-    const avatarAdress = `img/avatars/user${AVATAR_ADRESS[index]}.png`;
+    const avatarAdress = `img/avatars/user${AVATARS_ADRESSES[index]}.png`;
     const proposalTitle = `Предложение № ${index}`;
     const locationLat = getRandomFloatFromTo(35.65000, 35.70000, 5);
     const locationLng = getRandomFloatFromTo(139.70000, 139.80000, 5);
@@ -62,13 +62,13 @@ const createObjects = (qty) => {
         title: proposalTitle,
         address: coordinates,
         price: prices,
-        type: TYPE[getRandomNumberFromTo(0, TYPE.length -1)],
+        type: HOUSING_TYPES[getRandomNumberFromTo(0, HOUSING_TYPES.length -1)],
         rooms: numberOfRooms,
         guests: numberOfGuests,
         checkin: TIME_OF_CHECKIN_AND_CHECKOUT[getRandomNumberFromTo(0, TIME_OF_CHECKIN_AND_CHECKOUT.length -1)],
         checkout: TIME_OF_CHECKIN_AND_CHECKOUT[getRandomNumberFromTo(0, TIME_OF_CHECKIN_AND_CHECKOUT.length -1)],
         features: getRandomArrFromArr(FEATURES, getRandomNumberFromTo(1, FEATURES.length)),
-        description: DISCRIPTION[getRandomNumberFromTo(0, DISCRIPTION.length -1)],
+        description: DESCRIPTIONS[getRandomNumberFromTo(0, DESCRIPTIONS.length -1)],
         photos: getRandomArrFromArr(PHOTOS,  getRandomNumberFromTo(1, PHOTOS.length)),
       },
 

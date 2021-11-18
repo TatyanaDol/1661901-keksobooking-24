@@ -4,6 +4,7 @@ import {getData} from './api.js';
 import {showErrorMessage} from './utils/util.js';
 import {debounce} from './utils/debounce.js';
 import {setcheckboxsContainerChange, setHousingGuestsFilterChange, setHousingRoomsFilterChange, setHousingPriceFilterChange, setHouseTypeFilterChange} from './filter.js';
+import './image.js';
 
 const RERENDER_DELAY = 500;
 
@@ -30,4 +31,3 @@ getData((arrayOfCards) => {
 );
 
 setAdFormSubmit(showSuccessMessage, showSubmitErrorMessage);
-
