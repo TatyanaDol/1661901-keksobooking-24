@@ -9,7 +9,7 @@ const AVATARS_ADRESSES = [
 const HOUSING_TYPES = [
   'palace', 'flat', 'house', 'bungalow', 'hotel',
 ];
-const TIME_OF_CHECKIN_AND_CHECKOUT = ['12:00', '13:00', '14:00'];
+const TIMES_OF_CHECKIN_AND_CHECKOUT = ['12:00', '13:00', '14:00'];
 
 const DESCRIPTIONS = ['Красивое', 'Не очень красивое', 'Божественно', 'Для новобрачных', 'Подойдет одиноким котикам'];
 
@@ -65,8 +65,8 @@ const createObjects = (qty) => {
         type: HOUSING_TYPES[getRandomNumberFromTo(0, HOUSING_TYPES.length -1)],
         rooms: numberOfRooms,
         guests: numberOfGuests,
-        checkin: TIME_OF_CHECKIN_AND_CHECKOUT[getRandomNumberFromTo(0, TIME_OF_CHECKIN_AND_CHECKOUT.length -1)],
-        checkout: TIME_OF_CHECKIN_AND_CHECKOUT[getRandomNumberFromTo(0, TIME_OF_CHECKIN_AND_CHECKOUT.length -1)],
+        checkin: TIMES_OF_CHECKIN_AND_CHECKOUT[getRandomNumberFromTo(0, TIMES_OF_CHECKIN_AND_CHECKOUT.length -1)],
+        checkout: TIMES_OF_CHECKIN_AND_CHECKOUT[getRandomNumberFromTo(0, TIMES_OF_CHECKIN_AND_CHECKOUT.length -1)],
         features: getRandomArrFromArr(FEATURES, getRandomNumberFromTo(1, FEATURES.length)),
         description: DESCRIPTIONS[getRandomNumberFromTo(0, DESCRIPTIONS.length -1)],
         photos: getRandomArrFromArr(PHOTOS,  getRandomNumberFromTo(1, PHOTOS.length)),
